@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="Core\ECS\Utilities\TypeInfo.cpp" />
+    <ClCompile Include="Core\ECS\World.cpp" />
+    <ClCompile Include="Core\ECS\SystemBase.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Profiler.h" />
+    <ClInclude Include="Core\CS\CSManager.h" />
+    <ClInclude Include="AsyncFunctionManager.h" />
+    <ClInclude Include="ReadWriteLock.h" />
+    <ClInclude Include="Core\ECS\Archetype.h" />
+    <ClInclude Include="Core\ECS\Utilities\TypeInfo.h" />
+    <ClInclude Include="Core\ECS\Common\Id.h" />
+    <ClInclude Include="Core\ECS\Entity.h" />
+    <ClInclude Include="Core\ECS\IComponentData.h" />
+    <ClInclude Include="Core\ECS\ComponentArray.h" />
+    <ClInclude Include="Core\ECS\Chunk.h" />
+    <ClInclude Include="Core\ECS\EntityManager.h" />
+    <ClInclude Include="Core\ECS\World.h" />
+    <ClInclude Include="Core\ECS\SystemBase.h" />
+    <ClInclude Include="Core\ECS\Test.h" />
+  </ItemGroup>
+</Project>
