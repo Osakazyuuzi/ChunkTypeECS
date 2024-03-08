@@ -24,7 +24,8 @@ public:
 			(std::chrono::high_resolution_clock::now() - m_StartTime).count();
 		
 		// 出力する
-		std::cout << "経過時間: " << duration << " ns" << std::endl;
+		std::cout << "経過時間: " << duration << " ns " <<
+			"FPS値: " << (1000000000 / duration) << std::endl;
 	}
 
 private:

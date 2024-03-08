@@ -6,7 +6,7 @@
 #include "Core/ECS/Test.h"
 #include "Core/ECS/World.h"
 
-constexpr std::size_t TEST_NUM = 100000;
+constexpr std::size_t TEST_NUM = 1000000;
 
 int main(void) {
     Profiler m_Profiler;
