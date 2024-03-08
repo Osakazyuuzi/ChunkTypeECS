@@ -35,7 +35,7 @@ namespace ECS
 		* @brief 処理を実行します。
 		* @param _deltaTime 前フレームとの差[ms]
 		*/
-		virtual void Update(float _deltaTime) {}
+		virtual void Update(float _deltaTime, std::shared_ptr<AsyncFunctionManager> _pAsyncManager) {}
 
 		/**
 		* @brief 描画を実行します。
@@ -82,18 +82,27 @@ namespace ECS
 		* @param _func 実行する関数。
 		*/
 		template <class... Components, typename Func>
-		void ExecuteForEntitiesMatching(Func&& _func)
+		void ExecuteForEntitiesMatching(std::shared_ptr<AsyncFunctionManager> _pAsyncManager, Func&& _func)
 		{
 			// アーキタイプが含まれているチャンクリストを取得
 			auto pChunkList = m_pWorld->GetEntityManager()->GetContainChunkList(m_Archetype);
 
+			//=== 非同期処理
+			std::vector<std::future<void>> futures;
+
 			for (auto&& pChunk : pChunkList)
 			{
 				auto func = std::forward<Func>(_func);
+				// AsyncFunctionManagerのExecuteメソッドを使用して、
+				// 必要なコンポーネント群を抜き出して、処理を非同期に実行する。
+				auto future = _pAsyncManager->Execute([this, pChunk, func]() {
+					ExecuteForEntitiesMatchingImpl(pChunk, func, pChunk->GetComponentList<Components>()...); });
+				futures.push_back(std::move(future));
+			}
 
-
-				// 必要なコンポーネント群を抜き出して、処理を実行
-				ExecuteForEntitiesMatchingImpl(pChunk, func, pChunk->GetComponentList<Components>()...);
+			// すべてのタスクが完了するまで待機
+			for (auto& future : futures) {
+				future.get();
 			}
 		}
 

@@ -36,7 +36,7 @@ namespace ECS
 		{
 			for (auto&& system : systems)
 			{
-				system->Update(_deltaTime);
+				system->Update(_deltaTime, m_pAsyncFunctionManager);
 			}
 		}
 	}

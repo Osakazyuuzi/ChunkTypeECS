@@ -75,7 +75,7 @@ namespace ECS
 			/**
 			* @brief XVˆ—‚ğ‚µ‚Ü‚·B
 			*/
-			void Update(float _deltaTime) override
+			void Update(float _deltaTime, std::shared_ptr<AsyncFunctionManager> _pAsyncManager) override
 			{
 				this->ExecuteForEntitiesMatching
 					<Component0,
@@ -89,7 +89,9 @@ namespace ECS
 					Component8,
 					Component9,
 					Component10>
-					([this]
+					(
+						_pAsyncManager, 
+						[this]
 					(
 						Component0& _comp0,
 						Component1& _comp1,
