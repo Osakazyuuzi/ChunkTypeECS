@@ -59,39 +59,39 @@ namespace CS
 		};
 		class TestComponent1 : public IComponent {
 		public:
-			int value = 0;
+			int value = 1;
 		};
 		class TestComponent2 : public IComponent {
 		public:
-			int value = 0;
+			int value = 2;
 		};
 		class TestComponent3 : public IComponent {
 		public:
-			int value = 0;
+			int value = 3;
 		};
 		class TestComponent4 : public IComponent {
 		public:
-			int value = 0;
+			int value = 4;
 		};
 		class TestComponent5 : public IComponent {
 		public:
-			int value = 0;
+			int value = 5;
 		};
 		class TestComponent6 : public IComponent {
 		public:
-			int value = 0;
+			int value = 6;
 		};
 		class TestComponent7 : public IComponent {
 		public:
-			int value = 0;
+			int value = 7;
 		};
 		class TestComponent8 : public IComponent {
 		public:
-			int value = 0;
+			int value = 8;
 		};
 		class TestComponent9 : public IComponent {
 		public:
-			int value = 0;
+			int value = 9;
 		};
 
 		class TestComponent10 : public IComponent {

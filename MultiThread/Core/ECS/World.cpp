@@ -5,12 +5,20 @@
 
 #include "EntityManager.h"
 
+#include "../../AsyncFunctionManager.h"
+#include <iostream>
 
 namespace ECS
 {
 	World::World()
 	{
 		m_pEntityManager = std::make_shared<EntityManager>(this);
+		m_pAsyncFunctionManager = std::make_shared<AsyncFunctionManager>();
+	}
+
+	World::~World()
+	{
+		m_pAsyncFunctionManager->Shutdown();
 	}
 
 	void World::Init()

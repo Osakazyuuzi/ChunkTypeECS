@@ -2,6 +2,9 @@
 
 #include <memory>
 #include <cstdint>
+#include <cstdio>
+#include <cstdlib>
+#include <Windows.h>
 #include "IComponentData.h"
 #include "Entity.h"
 #include "Archetype.h"
@@ -22,12 +25,17 @@ namespace ECS
 		 * @param _archetype このチャンクに関連付けられるアーキタイプ。
 		 */
 		explicit Chunk(const Archetype& _archetype)
-			: m_Size(0)
+			: m_Size(0), m_Archetype(_archetype)
 		{
-			m_Archetype = _archetype;
-			m_pBegin = std::make_shared<std::byte[]>(mc_Capacity);
-			m_MaxSize = mc_Capacity /
-				(sizeof Entity + m_Archetype.GetArchetypeMemorySize());
+			m_pBegin = std::shared_ptr<std::byte[]>(
+				static_cast<std::byte*>(_aligned_malloc(mc_Capacity, alignof(Entity))),
+				[](std::byte* ptr) { _aligned_free(ptr); });
+			m_MaxSize = mc_Capacity / (sizeof(Entity) + m_Archetype.GetArchetypeMemorySize());
+
+			if (!m_pBegin) {
+				// メモリ割り当てに失敗した場合の処理
+				MessageBox(nullptr, L"メモリ割り当て失敗", L"Error", MB_OK);
+			}
 		}
 
 		Chunk(const Chunk& _other)
@@ -306,6 +314,6 @@ namespace ECS
 		//! チャンクの最大サイズ。
 		std::uint32_t m_MaxSize;
 		//! チャンクの容量。
-		static constexpr std::uint32_t mc_Capacity = 4096;
+		static constexpr std::uint32_t mc_Capacity = 4096*4;
 	};
 }

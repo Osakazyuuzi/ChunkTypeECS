@@ -2,12 +2,11 @@
 #include <vector>
 
 #include "Profiler.h"
-#include "AsyncFunctionManager.h"
 #include "Core/CS/CSManager.h"
 #include "Core/ECS/Test.h"
 #include "Core/ECS/World.h"
 
-constexpr std::size_t TEST_NUM = 10000;
+constexpr std::size_t TEST_NUM = 100000;
 
 int main(void) {
     Profiler m_Profiler;
@@ -69,7 +68,20 @@ int main(void) {
         for (std::size_t i = 0; i < TEST_NUM; i++) {
             // オブジェクト追加
             auto entity = manager->CreateEntity(archetype);
+            // 初期化
+            manager->SetComponent(entity, Test::Component0());
+            manager->SetComponent(entity, Test::Component1());
+            manager->SetComponent(entity, Test::Component2());
+            manager->SetComponent(entity, Test::Component3());
+            manager->SetComponent(entity, Test::Component4());
+            manager->SetComponent(entity, Test::Component5());
+            manager->SetComponent(entity, Test::Component6());
+            manager->SetComponent(entity, Test::Component7());
+            manager->SetComponent(entity, Test::Component8());
+            manager->SetComponent(entity, Test::Component9());
+            manager->SetComponent(entity, Test::Component10());
         }
+
         world.AddSystem<Test::TestSystem>(0);
 
         //=== 処理計測

@@ -13,39 +13,39 @@ namespace ECS
 		};
 		struct Component1 : public IComponentData {
 		public:
-			int value = 0;
+			int value = 1;
 		};
 		struct Component2 : public IComponentData {
 		public:
-			int value = 0;
+			int value = 2;
 		};
 		struct Component3 : public IComponentData {
 		public:
-			int value = 0;
+			int value = 3;
 		};
 		struct Component4 : public IComponentData {
 		public:
-			int value = 0;
+			int value = 4;
 		};
 		struct Component5 : public IComponentData {
 		public:
-			int value = 0;
+			int value = 5;
 		};
 		struct Component6 : public IComponentData {
 		public:
-			int value = 0;
+			int value = 6;
 		};
 		struct Component7 : public IComponentData {
 		public:
-			int value = 0;
+			int value = 7;
 		};
 		struct Component8 : public IComponentData {
 		public:
-			int value = 0;
+			int value = 8;
 		};
 		struct Component9 : public IComponentData {
 		public:
-			int value = 0;
+			int value = 9;
 		};
 		struct Component10 : public IComponentData {
 		public:

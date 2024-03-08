@@ -46,9 +46,12 @@ namespace ECS
 		{
 			auto entityInfo = m_vRecycleEntityIndices.size() == 0 ?
 				CreateNewEntity() : CreateRecycleEntity();
+
 			const std::uint32_t chunkIndex = GetAndCreateChunkIndex(_archetype, true);
+
 			std::uint32_t chunkInIndex = m_pWorld->m_ChunkList[chunkIndex].
 				CreateEntity(entityInfo.first, entityInfo.second);
+
 			m_vEntities[entityInfo.first].first =
 				EntityInfo(chunkIndex, chunkInIndex);
 			return m_vEntities[entityInfo.first].second;
@@ -183,7 +186,7 @@ namespace ECS
 			result.reserve(8);
 			for (auto&& chunk : m_pWorld->m_ChunkList)
 			{
-				if (chunk.GetArchetype().IsContain(_archetype))
+				if (_archetype.IsContain(chunk.GetArchetype()))
 				{
 					result.push_back(&chunk);
 				}
@@ -202,10 +205,10 @@ namespace ECS
 			std::uint32_t chunkIndex = 0;
 			for (auto&& chunk : m_pWorld->m_ChunkList)
 			{
-				if (chunk.GetArchetype().GetSignature()
-					== _archetype.GetSignature())
-					if (!_maxCheck || chunk.IsMax())
+				if (chunk.GetArchetype().GetSignature() == _archetype.GetSignature())
+					if (_maxCheck && !chunk.IsMax())
 						return chunkIndex;
+
 				++chunkIndex;
 			}
 

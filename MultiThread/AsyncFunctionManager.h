@@ -90,6 +90,16 @@ public:
         // タスクキューが空かどうかを返す。
         return m_TaskQueue.empty();
     }
+    
+    /**
+    * @brief 全てのタスクが完了するまで待つ。
+    */
+    inline void WaitForAllTasksToComplete() {
+        // すべてのスレッドが終了するのを待つ。
+        for (auto& thread : m_Threads) {
+                thread.join();
+        }
+    }
 
 private:
     /**

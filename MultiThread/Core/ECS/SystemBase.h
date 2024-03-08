@@ -5,6 +5,8 @@
 #include "World.h"
 #include "EntityManager.h"
 
+#include "../../AsyncFunctionManager.h"
+
 namespace ECS
 {
 	/**
@@ -87,8 +89,11 @@ namespace ECS
 
 			for (auto&& pChunk : pChunkList)
 			{
+				auto func = std::forward<Func>(_func);
+
+
 				// 必要なコンポーネント群を抜き出して、処理を実行
-				ExecuteForEntitiesMatchingImpl(pChunk, std::forward<Func>(_func), pChunk->GetComponentList<Components>()...);
+				ExecuteForEntitiesMatchingImpl(pChunk, func, pChunk->GetComponentList<Components>()...);
 			}
 		}
 

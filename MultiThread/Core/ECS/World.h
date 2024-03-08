@@ -4,6 +4,8 @@
 #include <memory>
 #include "Chunk.h"
 
+class AsyncFunctionManager;
+
 namespace ECS
 {
 	class SystemBase;
@@ -14,7 +16,7 @@ namespace ECS
 		friend EntityManager;
 	public:
 		World();
-		//~World();
+		~World();
 
 		/**
 		* @brief ‰Šú‰»ˆ—‚ğs‚¢‚Ü‚·B
@@ -68,5 +70,6 @@ namespace ECS
 		std::vector<Chunk> m_ChunkList;
 		std::vector<std::vector<std::shared_ptr<SystemBase>>> m_SystemList;
 		std::shared_ptr<EntityManager> m_pEntityManager;
+		std::shared_ptr<AsyncFunctionManager> m_pAsyncFunctionManager;
 	};
 }
